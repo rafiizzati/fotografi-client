@@ -6,20 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('portofolios', function (Blueprint $table) {
-            $table->id();
+            $table->id('portfolio_id');
+            $table->foreignId('mitra_id')->constrained('mitras', 'mitra_id')->onDelete('cascade');
+            $table->string('judul');
+            $table->string('foto_url');
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('portofolios');

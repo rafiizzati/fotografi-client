@@ -6,20 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('syarat_ketentuans', function (Blueprint $table) {
-            $table->id();
+            $table->id('sk_id');
+            $table->foreignId('produk_id')->nullable()->constrained('produks', 'produk_id')->onDelete('cascade');
+            $table->foreignId('mitra_id')->nullable()->constrained('mitras', 'mitra_id')->onDelete('cascade');
+            $table->text('isi_syarat');
+            $table->integer('urutan')->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('syarat_ketentuans');

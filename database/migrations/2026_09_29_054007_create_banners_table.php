@@ -6,20 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('banners', function (Blueprint $table) {
-            $table->id();
+            $table->id('banner_id');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
+            $table->string('gambar');
+            $table->string('link_tujuan')->nullable();
+            $table->integer('urutan')->default(0);
+            $table->boolean('is_active')->default(true);
+            $table->date('tanggal_mulai')->nullable();
+            $table->date('tanggal_selesai')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('banners');
