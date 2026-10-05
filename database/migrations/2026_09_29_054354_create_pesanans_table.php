@@ -24,7 +24,7 @@ return new class extends Migration
                 'dikonfirmasi',
                 'berlangsung',
                 'selesai',
-                'dibatalkan'
+                'dibatalkan',
             ])->default('menunggu_pembayaran');
             $table->text('catatan')->nullable();
             $table->string('metode_pengambilan')->nullable();

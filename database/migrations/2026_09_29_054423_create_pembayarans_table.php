@@ -21,7 +21,7 @@ return new class extends Migration
                 'berhasil',
                 'gagal',
                 'kadaluarsa',
-                'refund'
+                'refund',
             ])->default('pending');
             $table->string('bukti_bayar')->nullable();
             $table->dateTime('waktu_bayar')->nullable();
