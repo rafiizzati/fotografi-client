@@ -53,12 +53,17 @@ class KatalogSeeder extends Seeder
         // --- Mitra ---
         $mitra = [];
         foreach ([
-            ['Studio Satu', 'Rental kamera dan jasa foto.', 'Jl. Merdeka No. 1, Blitar'],
-            ['Studio Dua', 'Spesialis foto prewedding.', 'Jl. Anggrek No. 2, Malang'],
-        ] as [$nama, $desc, $alamat]) {
+            ['Studio Satu', 'Rental kamera dan jasa foto.', 'Jl. Merdeka No. 1, Blitar', 'mitra1@fotografi.test'],
+            ['Studio Dua', 'Spesialis foto prewedding.', 'Jl. Anggrek No. 2, Malang', 'mitra2@fotografi.test'],
+        ] as [$nama, $desc, $alamat, $emailPemilik]) {
             $mitra[$nama] = Mitra::updateOrCreate(
                 ['nama_mitra' => $nama],
-                ['deskripsi' => $desc, 'alamat' => $alamat, 'jam_operasional' => '08:00 - 20:00'],
+                [
+                    'user_id' => User::where('email', $emailPemilik)->value('user_id'),
+                    'deskripsi' => $desc,
+                    'alamat' => $alamat,
+                    'jam_operasional' => '08:00 - 20:00',
+                ],
             );
         }
 
