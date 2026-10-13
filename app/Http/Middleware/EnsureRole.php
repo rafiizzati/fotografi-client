@@ -8,13 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EnsureRole
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string ...$roles): Response
     {
+        if (! $request->user() || ! in_array($request->user()->role, $roles, true)) {
+            abort(403, 'Tidak punya akses');
+        }
+
         return $next($request);
     }
 }
